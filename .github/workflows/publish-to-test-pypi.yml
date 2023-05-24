@@ -17,6 +17,11 @@ jobs:
       - name: Build a binary wheel and a source tarball
         run: >-
           python3 -m build --sdist --wheel --outdir dist/
+      - name: Upload a binary wheel and a source tarball as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: vape_base_extension-${{ github.sha }}
+          path: dist/
   pypi-publish:
     name: Upload release to PyPI
     needs: build-n-publish
@@ -27,7 +32,10 @@ jobs:
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
-      # retrieve your distributions here
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: vape_base_extension-${{ github.sha }}
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
