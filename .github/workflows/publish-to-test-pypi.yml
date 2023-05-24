@@ -21,7 +21,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: vape_base_extension-${{ github.sha }}
-          path: dist/*
+          path: dist/
   pypi-publish:
     name: Upload release to PyPI
     needs: build-n-publish
@@ -37,6 +37,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: vape_base_extension-${{ github.sha }}
+          path: dist/
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
