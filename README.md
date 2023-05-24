@@ -1,2 +1,2 @@
-# VAP-E_Extensions_Base-Extension-Python
+# VAP-E Extensions: Base Extension (Python Package)
 VAP-E's base extension python package 
